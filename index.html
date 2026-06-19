@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hasna & Dana</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary: #1f2937;
+        --accent: #b91c1c;
+        --bg: #fafafa;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: #333;
+        line-height: 1.7;
+      }
+
+      .hero {
+        height: 100vh;
+        background: url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1800")
+          center center/cover;
+        position: relative;
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .hero p {
+        margin: 10px 0;
+      }
+
+      .button {
+        margin-top: 25px;
+        background: white;
+        color: black;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      section {
+        max-width: 900px;
+        margin: auto;
+        padding: 80px 20px;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .card {
+        background: white;
+        padding: 24px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      }
+
+      .couple {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .person img {
+        width: 100%;
+        border-radius: 16px;
+      }
+
+      .highlight {
+        color: red;
+        font-weight: 700;
+      }
+
+      .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .count-item {
+        background: white;
+        width: 100px;
+        padding: 20px;
+        border-radius: 16px;
+        text-align: center;
+      }
+
+      .timeline .card {
+        border-left: 4px solid #ddd;
+      }
+
+      footer {
+        text-align: center;
+        padding: 80px 20px;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.8rem;
+        }
+
+        .couple {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="music" loop>
+      <source src="music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <section class="hero">
+      <div class="overlay"></div>
+
+      <div class="hero-content">
+        <p>The Wedding Of</p>
+
+        <h1>Hasna & Dana</h1>
+
+        <p>09 Agustus 2026</p>
+
+        <br />
+
+        <p>Kepada Yth.</p>
+        <h3 id="guestName">Tamu Undangan</h3>
+        <p id="coverSession"></p>
+        <button class="button" onclick="openInvitation()">Buka Undangan</button>
+      </div>
+    </section>
+
+    <div id="content" style="display: none">
+      <section>
+        <div class="section-title">
+          <h2>Assalamu'alaikum Wr. Wb.</h2>
+        </div>
+
+        <div class="card">
+          Dengan memohon rahmat dan ridha Allah SWT, kami mengundang
+          Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan kami.
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Mempelai</h2>
+        </div>
+
+        <div class="couple">
+          <div class="card person">
+            <img src="https://picsum.photos/500/700?random=1" />
+
+            <h3>Nurdana Ahmad Fadil</h3>
+
+            <p>Putra dari Bapak Kardono dan Almarhumah Ibu Nurul Zakiyah</p>
+          </div>
+
+          <div class="card person">
+            <img src="https://picsum.photos/500/700?random=2" />
+
+            <h3>Novia Hasna Salsabila</h3>
+
+            <p>Putri dari Bapak Marsono dan Ibu Budi Asmara</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Countdown</h2>
+        </div>
+
+        <div class="countdown">
+          <div class="count-item">
+            <div id="days">0</div>
+            Hari
+          </div>
+
+          <div class="count-item">
+            <div id="hours">0</div>
+            Jam
+          </div>
+
+          <div class="count-item">
+            <div id="minutes">0</div>
+            Menit
+          </div>
+
+          <div class="count-item">
+            <div id="seconds">0</div>
+            Detik
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline">
+        <div class="section-title">
+          <h2>Kisah Kami</h2>
+        </div>
+
+        <div class="card">
+          <h4 class="highlight">[BELUM DIISI]</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </div>
+
+        <div class="card">
+          <h4 class="highlight">[BELUM DIISI]</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </div>
+
+        <div class="card">
+          <h4 class="highlight">[BELUM DIISI]</h4>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Detail Acara</h2>
+        </div>
+
+        <div class="card">
+          <h3>Akad & Resepsi</h3>
+
+          <p>Minggu, 09 Agustus 2026</p>
+
+          <br />
+          <p id="detailSession"></p>
+
+          <br />
+
+          <p class="highlight">[NAMA GEDUNG / LOKASI BELUM DIISI]</p>
+
+          <p class="highlight">[ALAMAT BELUM DIISI]</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Lokasi</h2>
+        </div>
+
+        <div class="card">
+          <div class="highlight">[EMBED GOOGLE MAPS BELUM DIISI]</div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>RSVP</h2>
+        </div>
+
+        <div class="card">
+          <p class="highlight">[LINK RSVP BELUM DIISI]</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Wedding Gift</h2>
+        </div>
+
+        <div class="card">
+          <p class="highlight">[NOMOR REKENING BELUM DIISI]</p>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-title">
+          <h2>Ucapan & Doa</h2>
+        </div>
+
+        <div class="card">
+          <p class="highlight">[INTEGRASI DATABASE BELUM DIISI]</p>
+        </div>
+      </section>
+
+      <footer>
+        <h2>Hasna & Dana</h2>
+
+        <p>Terima kasih atas doa dan kehadiran Anda.</p>
+      </footer>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+
+      document.getElementById("guestName").innerText =
+        params.get("to") || "Tamu Undangan";
+
+      function openInvitation() {
+        document.getElementById("content").style.display = "block";
+
+        document.getElementById("music").play();
+
+        document
+          .getElementById("content")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      const weddingDate = new Date("2026-08-09T10:00:00");
+
+      setInterval(() => {
+        const now = new Date();
+
+        const diff = weddingDate - now;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+      }, 1000);
+
+      const guestName = params.get("to") || "Tamu Undangan";
+      const session = params.get("s") || "-";
+
+      document.getElementById("guestName").textContent = guestName;
+
+      const sessionMap = {
+        1: "Sesi 1 • 10.00 WIB",
+        2: "Sesi 2 • 11.00 WIB",
+        3: "Sesi 3 • 12.00 WIB",
+      };
+      const sessionText = sessionMap[session] || "Jadwal belum ditentukan";
+      document.getElementById("coverSession").textContent = sessionText;
+      document.getElementById("detailSession").textContent = sessionText;
+    </script>
+  </body>
+</html>
